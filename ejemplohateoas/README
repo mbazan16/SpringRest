@@ -1,0 +1,19 @@
+Este es un ejemplo de contrucción de una parte de una API RestFull utilizando Hateoas.
+Se debe incluir la dependencia hateoas además de la web.
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+Y los recursos a exponer deben extender de RepresentationModel<?>, clase que nos va a 
+construir el modelo de representación que se exponga en la API. 
+Ver: Employee.class
+
+Además, RepresentationModel, nos permite añadir tantos link como queramos para completar
+nuestra API RestFull
+Ejemplo: EmployeeController.class
+employee.add(linkTo(methodOn(EmployeeController.class).ver(employee.getId())).withSelfRel());
