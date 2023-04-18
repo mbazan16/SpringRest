@@ -1,0 +1,111 @@
+Este un proyecto RestFull generado con el modulo Spring Data Rest y HATOAS de SpringBoot.
+
+-------------------    SPRING DATA RESTFULL  -------------------------------
+Las apis RestFull se generan automáticamente, simplemente por incluir las dependencias
+ de spring data jpa y spring data rest.
+ La documentación de referencia de Spring Data Rest es:
+ https://docs.spring.io/spring-data/rest/docs/current/reference/html/
+ Simplemente hay que incluir estas dos propiedades en el archivo application.properties:
+ 
+ spring.data.rest.base-path=/api
+spring.data.rest.detection-strategy=all
+
+----- Estrategias de exposición
+Las estrategias son:
+ALL - Todas los repositorios jpa. Anotados o no y públicos o no públicos.
+DEFAULT - Todos los repositorios pero tiene en cuenta el indicador
+ANNOTATED - Solo los repositorios anotados al menos que su indicador
+			indique lo contrario
+VISIBILITY Solo los repositorios públicos y anotados
+
+El proyecto tiene el caso ALL exporta todos los repositorios
+
+Ejemplo Caso DEFAULT:
+En application.properties: 
+	spring.data.rest.detection-strategy=default
+En EmployeeRepository:
+	@RepositoryRestResource(path = "employees", collectionResourceRel = "employees",exported = false)
+Se ejecuta y se comprueba que únicamente tenemos la api de Department,
+ ya que EmployeeRepository le hemos indicado que no se exporte.
+
+Ejemplo Caso ANNOTATED:
+En application.properties: 
+	spring.data.rest.detection-strategy=annotated
+En EmployeeRepository:
+	@RepositoryRestResource(path = "employees", collectionResourceRel = "employees",exported = false)
+Se ejecuta y se comprueba que no tenemos ninguna, porque la que esta anotada con @RepositoryRestResource indica que no se exporte
+Se cambia en EmployeeRepository:
+	@RepositoryRestResource(path = "employees", collectionResourceRel = "employees")
+Se ejecuta y se comprueba que únicamente tenemos la api de Employee porque es la que esta anotada
+con @RepositoryRestResource.
+
+Ejemplo Caso VISIBILITY:
+En application.properties: 
+	spring.data.rest.detection-strategy=visibility
+En EmployeeRepository:
+	@RepositoryRestResource(path = "employees", collectionResourceRel = "employees",exported = false)
+Se ejecuta y se comprueba que únicamente tenemos las api de Employee y Department 
+aunque EmployeeRepository indique que no se exporte.
+
+---- Métodos de búsqueda 
+En EmployeeRepository se han incluido dos métodos de búsqueda, para incluirlos en la api 
+únicamente hay que anotarlos con la anotación @RestResource, se exportarán con el nombre
+indicado por la propiedad name, si no se indica la propiedad se exportará con el nombre del método
+
+@RestResource(path="names")
+List<Employee> findByName( Integer id); --> se exportará como http://localhost:8084/api/employees/search/names{?id}
+
+
+------------------------ TECNOLOGIAS AÑADIDAS OPCIONALES ----------------------------------
+---------------------------------   LOMBOK --------------------------------
+Es una utilidad para generación de código.
+la anotación @Data equivale a:@ToString@EqualsAndHashCode@Getter@Setter@RequiredArgsConstructor
+Ver: Department.class
+Con anotar la clase, automáticamente nos construye los getter//setter para todas las propiedades,
+el método ToString, los método equals y hashCode y el constructor por defecto y constructor con 
+todas las propiedades
+
+Nota: en el exporador HAL parece que no funcionan las peticiones POST,PUT, PATCH y DELETE sobre 
+Department, pero probando con Postman, todo es correcto.
+
+Documentación oficial:https://projectlombok.org/
+
+---------------------------------   EXPLORADOR HAL --------------------------------
+Es una aplicación web basada en Angular que le permite explorar fácilmente las respuestas HTTP basadas en HAL y HAL-FORMS
+
+Solamente necesitamos incluir la dependencia spring-data-rest-hal-explorer.
+
+----------------------------  DOCUMENTACION CON OpenAPI 3.0-SWAGGER -----------------------
+OpenAPI 3.0 es una herramienta que integra la herramienta SWAGGER para la generación de documentación
+de las API Rest que se exportan en el proyecto.
+Documentación oficial:
+https://springdoc.org/
+Para su utilización se debe incluir la dependencia:
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+También es necesario un validador:
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+E incluir el path de la documentación en el fichero application.properties
+springdoc.api-docs.path=/api-docs
+
+
+Para que también genere la documentación de los Repositorios Rest se debe incluir también la dependencia:
+<dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-data-rest</artifactId>
+        <version>1.6.4</version>
+    </dependency>
+    
+La documentación SWAGGER va a estar disponible en:
+
+http://localhost:8084/swagger-ui.html
+
+
+
