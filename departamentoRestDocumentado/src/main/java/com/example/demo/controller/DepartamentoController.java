@@ -17,7 +17,7 @@ import com.example.demo.common.exceptions.ServicioException;
 import com.example.demo.entities.Departamento;
 
 @RestController
-@RequestMapping("/deparmentos")
+@RequestMapping("/departamentos")
 public class DepartamentoController {
 	
 	@Autowired
