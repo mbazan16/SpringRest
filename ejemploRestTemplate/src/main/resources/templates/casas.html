@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Casas</title>
+</head>
+<body>
+	<h1>Listado de casas</h1>
+	<table>
+	<tr th:each="casa:${casas}">
+		
+			<td th:text="${casa.nombre}"/>
+			<td>
+			   <a th:href="@{/casa/}+${casa.id}"><img src="https://img.icons8.com/color/search" width=15 height=15></a>
+				<a th:href="@{/casa/e/}+${casa.id}"><img src="https://img.icons8.com/color/48/000000/waste--v1.png" width=15 height=15/></a>
+			</td>
+	</trl>
+	</table>
+	<h2>Nuevo Casa</h2>
+	
+	<form id="fnuevo" th:action="@{/casa}" th:method="post">
+		<label for="nombre">Nombre: </label>
+		<input type="text" id="nombre" name="nombre" />		
+		<input type="submit" value="Crear" />	
+	</form>
+
+</body>
+</html>

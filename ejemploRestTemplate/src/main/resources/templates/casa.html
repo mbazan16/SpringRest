@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Casa</title>
+</head>
+<body>
+	<h1>Casa</h1>
+	
+	<h2 th:text="${casa.nombre}"/>
+	
+	<a th:href="@{/casa}">Volver</a>
+	
+	<h2>Modificar Casa</h2>
+	
+	<form id="fmodificar" th:action="@{/casa/}+${casa.id}" th:object="${casa}" th:method="post">
+		<input hidden="true" type="text" th:field="*{id}">
+		<label for="nombre">Nombre: </label>
+		<input type="text" id="nombre" th:field="*{nombre}"/>		
+		<input type="submit" value="Crear" />
+	</form>
+	
+	
+	
+</body>
+</html>
