@@ -10,8 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@NoArgsConstructor
+//@Data
+//@NoArgsConstructor
 @Table(name="DEPARTMENTS")
 public class Departamento {
 	
@@ -24,5 +24,49 @@ public class Departamento {
 	@ManyToOne
 	@JoinColumn(name="LOCATION_ID")
 	private Direccion direccion;
+
+	public Departamento() {
+		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getIdGestor() {
+		return idGestor;
+	}
+
+	public void setIdGestor(String idGestor) {
+		this.idGestor = idGestor;
+	}
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
+
+	@Override
+	public String toString() {
+		return "Departamento [id=" + id + ", nombre=" + nombre + ", idGestor=" + idGestor + ", direccion=" + direccion
+				+ "]";
+	}
+	
+	
 
 }

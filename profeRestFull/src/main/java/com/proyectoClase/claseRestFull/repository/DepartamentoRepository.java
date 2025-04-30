@@ -1,10 +1,11 @@
 package com.proyectoClase.claseRestFull.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import com.proyectoClase.claseRestFull.entities.Departamento;
 
@@ -13,10 +14,13 @@ import com.proyectoClase.claseRestFull.entities.Departamento;
 public interface DepartamentoRepository  extends JpaRepository<Departamento, Integer> {
 	
 	
-    List<Departamento> findByNombre( String nombre);
+    Optional<Departamento> findByNombre(String nombre);
 	
 	 
     List<Departamento> findByDireccion_Id(@Param("id") Integer idDireccion);
+    
+    @Query("select d from Departamento d where d.direccion.pais.region.id=:id")
+    List<Departamento> findByIdRegion(@Param("id")Integer idRegion);
 
 
 }

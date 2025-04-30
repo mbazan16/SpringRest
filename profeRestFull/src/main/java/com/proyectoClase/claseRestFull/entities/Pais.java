@@ -8,15 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Builder
+//@Getter
+//@Setter
 @Table(name = "COUNTRIES")
 public class Pais {
 
@@ -29,4 +32,42 @@ public class Pais {
     @ManyToOne
     @JoinColumn(name = "REGION_ID")
     private Region region;
+    
+    
+
+	public Pais() {
+		super();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	@Override
+	public String toString() {
+		return "Pais [id=" + id + ", nombre=" + nombre + ", region=" + region + "]";
+	}
+    
+    
+    
 }
