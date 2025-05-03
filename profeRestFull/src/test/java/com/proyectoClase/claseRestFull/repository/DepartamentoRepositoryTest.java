@@ -32,42 +32,42 @@ class DepartamentoRepositoryTest {
 	
 	@BeforeEach
 	void cargarDatos() {
-		Region region = new Region();
-		region.setId(6);
-		region.setNombre("Atlantida");
-		
-	
-		
-		Pais pais = new Pais();
-		pais.setId("ES");
-		pais.setNombre("ESPAÑA");
-		pais.setRegion(region);
-		
-		Direccion direccion = new Direccion();
-		direccion.setId(6700);
-		direccion.setPais(pais);
-		
-		
-		Departamento departamento = new Departamento();
-		departamento.setId(1000);
-		departamento.setNombre("PRUEBA");
-		departamento.setDireccion(direccion);	
-		
-		
-		repositorio.save(departamento);
+//		Region region = new Region();
+//		region.setId(6);
+//		region.setNombre("Atlantida");
+//		
+//	
+//		
+//		Pais pais = new Pais();
+//		pais.setId("ES");
+//		pais.setNombre("ESPAÑA");
+//		pais.setRegion(region);
+//		
+//		Direccion direccion = new Direccion();
+//		direccion.setId(6700);
+//		direccion.setPais(pais);
+//		
+//		
+//		Departamento departamento = new Departamento();
+//		departamento.setId(1000);
+//		departamento.setNombre("PRUEBA");
+//		departamento.setDireccion(direccion);	
+//		
+//		
+//		repositorio.save(departamento);
 	}
 
-//	@Test
-//	@DisplayName("findByNombre_OK")
-//	void findByNombreOk() {
-//		
-//		Optional<Departamento> departamento =null;// repositorio.findByNombre(123);
-//		
-//		assertEquals(departamento.isPresent(), true);	
-//		assertEquals(departamento.get().getId(), 1000);		
-//		
-//		
-//	}
+	@Test
+	@DisplayName("findByNombre_OK")
+	void findByNombreOk() {
+		
+		Optional<Departamento> departamento = repositorio.findByNombre("Finanzas");
+		
+		assertEquals(departamento.isPresent(), true);	
+		assertEquals(departamento.get().getId(), 50);		
+		
+		
+	}
 	
 	@Test
 	@DisplayName("findByNombre_KO")
@@ -84,14 +84,26 @@ class DepartamentoRepositoryTest {
 	@DisplayName("findByIdRegion_OK")
 	void findByIdRegion_OK() {
 		log.info("[findByIdRegion_OK");
-		List<Departamento> departamentos = repositorio.findByIdRegion(6);
+		List<Departamento> departamentos = repositorio.findByIdRegion(1);
 		log.info("DEPARTAMENTOS:"+ departamentos);
 		
-		Departamento departamento = repositorio.findById(1000).get();
-		log.info("DEPARTAMENTO: {}",departamento);
-		
+				
 		assertEquals(false, departamentos.isEmpty());	
-		assertEquals( 1000,departamentos.get(0).getId());		
+		assertEquals( 4,departamentos.size());		
+		
+		
+	}
+	
+	@Test
+	@DisplayName("findByIdRegion_KO")
+	void findByIdRegion_KO() {
+		log.info("[findByIdRegion_OK");
+		List<Departamento> departamentos = repositorio.findByIdRegion(null);
+		log.info("DEPARTAMENTOS:"+ departamentos);
+		
+				
+		assertEquals(true, departamentos.isEmpty());	
+		assertEquals( 0,departamentos.size());		
 		
 		
 	}
@@ -99,10 +111,10 @@ class DepartamentoRepositoryTest {
 	
 	@AfterEach
 	void eliminarDatos() {
-		Departamento departamento = new Departamento();
-		departamento.setId(1000);
-		departamento.setNombre("PRUEBA");		
-		repositorio.delete(departamento);
+//		Departamento departamento = new Departamento();
+//		departamento.setId(1000);
+//		departamento.setNombre("PRUEBA");		
+//		repositorio.delete(departamento);
 	}
 	
 

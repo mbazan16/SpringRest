@@ -76,18 +76,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>17</source> <!-- Especifica que estás usando Java 17 -->
-                <target>17</target> <!-- Especifica que el bytecode generado es para Java 17 -->
-                <encoding>UTF-8</encoding>
-                <compilerArgument>-parameters</compilerArgument> <!-- Asegúrate de tener esto aquí -->
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.projectlombok</groupId>
-                        <artifactId>lombok</artifactId>
-                    </path>
-                </annotationProcessorPaths>
-            </configuration>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

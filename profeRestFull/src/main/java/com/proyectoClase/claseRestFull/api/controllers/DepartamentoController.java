@@ -3,6 +3,7 @@ package com.proyectoClase.claseRestFull.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,11 +57,11 @@ public class DepartamentoController {
 	
 	
 	@DeleteMapping("/{id}")
-	public String  delete(@PathVariable Integer id) throws ServicioException {
+	public ResponseEntity<String>  delete(@PathVariable Integer id) throws ServicioException {
 		
 		servicio.eliminarDepartamento(id);
 		
-		return "Se ha eliminado";
+		return ResponseEntity.ok("Se ha eliminado");
 		
 	}
 
