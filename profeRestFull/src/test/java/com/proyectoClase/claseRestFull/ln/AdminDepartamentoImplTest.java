@@ -108,4 +108,42 @@ class AdminDepartamentoImplTest {
 
 		assertThrows(ServicioException.class, () -> adminDepartamento.eliminarDepartamento(1));
 	}
+	
+	@Test
+	void testListDepartamentosByIdRegionSuccess() throws ServicioException {
+		when(repository.findByIdRegion(1)).thenReturn(List.of(departamento));
+
+		List<Departamento> result = adminDepartamento.listDepartamentosByIdRegion(1);
+
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		verify(repository).findByIdRegion(1);
+	}
+
+	@Test
+	void testListDepartamentosByIdRegionException() {
+		when(repository.findByIdRegion(null)).thenThrow(new RuntimeException("DB Error"));
+
+		assertThrows(ServicioException.class, () -> adminDepartamento.listDepartamentosByIdRegion(null));
+	}
+	
+	@Test
+	void testListDepartamentosByIdDireccionSuccess() throws ServicioException {
+		when(repository.findByDireccion_Id(1700)).thenReturn(List.of(departamento));
+
+		List<Departamento> result = adminDepartamento.listDepartamentosByIdDireccion(1700);
+
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		verify(repository).findByDireccion_Id(1700);
+	}
+
+	@Test
+	void testListDepartamentosByIdDireccionException() {
+		when(repository.findByDireccion_Id(null)).thenThrow(new RuntimeException("DB Error"));
+
+		assertThrows(ServicioException.class, () -> adminDepartamento.listDepartamentosByIdDireccion(null));
+	}
+
+
 }

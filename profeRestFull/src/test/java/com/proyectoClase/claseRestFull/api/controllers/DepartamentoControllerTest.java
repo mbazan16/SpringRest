@@ -107,4 +107,23 @@ class DepartamentoControllerTest {
 //                .andExpect(content().string("Se ha eliminado"));
 //    }
 
+    @Test
+    void testListDepartamentosByRegion() throws Exception {
+        when(servicio.listDepartamentosByIdRegion(1)).thenReturn(List.of(getSampleDepartamento()));
+
+        mockMvc.perform(get("/api/departamentos/region"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(1))
+                .andExpect(jsonPath("$[0].nombre").value("Finanzas"));
+    }
+    
+    @Test
+    void testListDepartamentosByDireccion() throws Exception {
+        when(servicio.listDepartamentosByIdDireccion(1700)).thenReturn(List.of(getSampleDepartamento()));
+
+        mockMvc.perform(get("/api/departamentos/direccion"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(1))
+                .andExpect(jsonPath("$[0].nombre").value("Finanzas"));
+    }
 }

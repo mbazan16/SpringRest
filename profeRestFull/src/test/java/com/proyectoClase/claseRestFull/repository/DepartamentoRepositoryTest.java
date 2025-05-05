@@ -81,6 +81,35 @@ class DepartamentoRepositoryTest {
 	}
 	
 	@Test
+	@DisplayName("findByIdDireccion_OK")
+	void findByIdDireccionn_OK() {
+		log.info("[findByIdDireccion_OK");
+		List<Departamento> departamentos = repositorio.findByDireccion_Id(1700);
+		log.info("DEPARTAMENTOS:"+ departamentos);
+		
+				
+		assertEquals(false, departamentos.isEmpty());	
+		assertEquals( 5,departamentos.size());		
+		
+		
+	}
+	
+	@Test
+	@DisplayName("findByIdDireccion_KO")
+	void findByIdDireccion_KO() {
+		log.info("[findByIdDireccion_KO");
+		List<Departamento> departamentos = repositorio.findByDireccion_Id(null);
+		log.info("DEPARTAMENTOS:"+ departamentos);
+		
+				
+		assertEquals(true, departamentos.isEmpty());	
+		assertEquals( 0,departamentos.size());		
+		
+		
+	}
+	
+	
+	@Test
 	@DisplayName("findByIdRegion_OK")
 	void findByIdRegion_OK() {
 		log.info("[findByIdRegion_OK");

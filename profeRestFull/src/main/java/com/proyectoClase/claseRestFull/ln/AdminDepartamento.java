@@ -16,5 +16,7 @@ public interface AdminDepartamento {
 	Departamento grabarDepartamento(Departamento departamento) throws ServicioException;
 
 	void eliminarDepartamento(Integer idDepartamento) throws ServicioException;
+	
+	
 
 }

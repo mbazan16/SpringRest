@@ -1,5 +1,6 @@
 package com.proyectoClase.claseRestFull.ln;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class AdminDepartamentoImpl implements AdminDepartamento {
 		List<Departamento> departamentos;
 		
 		try {
-			departamentos= repository.findAll();
+			departamentos= new ArrayList<Departamento>();
 			
 		}catch(Exception e) {
 			log.error("Exception", e);
@@ -50,7 +51,7 @@ public class AdminDepartamentoImpl implements AdminDepartamento {
 		try {
 			Optional<Departamento> departamentoOp= repository.findById(idDepartamento);
 			if(!departamentoOp.isPresent()) throw new ServicioException(CodeError.DEPARTAMENTO_NOT_FOUND);
-			departamento= departamentoOp.get();
+			departamento= null; 
 		}catch(ServicioException se) {
 			log.error("ServicioException", se);
 			throw se;
@@ -92,5 +93,7 @@ public class AdminDepartamentoImpl implements AdminDepartamento {
 		}
 		
 	}
+	
+	
 
 }
