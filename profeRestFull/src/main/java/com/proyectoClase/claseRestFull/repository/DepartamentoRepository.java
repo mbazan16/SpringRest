@@ -17,10 +17,7 @@ public interface DepartamentoRepository  extends JpaRepository<Departamento, Int
     Optional<Departamento> findByNombre(String nombre);
 	
 	 
-    List<Departamento> findByDireccion_Id(@Param("id") Integer idDireccion);
-    
-    @Query("select d from Departamento d where d.direccion.pais.region.id=:id")
-    List<Departamento> findByIdRegion(@Param("id")Integer idRegion);
+   
 
 
 }
