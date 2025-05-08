@@ -65,7 +65,17 @@ public class DepartamentoController {
 		
 	}
 	
+	@GetMapping("/region")
+	public List<Departamento> listByRegion() throws ServicioException{
+		Integer idRegion=1;
+		return servicio.listDepartamentosByIdRegion(idRegion);
+		
+	}
 	
-	
-
+	@GetMapping("/direccion")
+	public List<Departamento> listByDireccion() throws ServicioException{
+		Integer idDireccion=1700;
+		return servicio.listDepartamentosByIdDireccion(idDireccion);
+		
+	}
 }

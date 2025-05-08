@@ -16,6 +16,10 @@ public interface AdminDepartamento {
 	Departamento grabarDepartamento(Departamento departamento) throws ServicioException;
 
 	void eliminarDepartamento(Integer idDepartamento) throws ServicioException;
+
+	List<Departamento> listDepartamentosByIdRegion(Integer idRegion) throws ServicioException;
+	
+	public List<Departamento> listDepartamentosByIdDireccion(Integer idDireccion) throws ServicioException;
 	
 	
 

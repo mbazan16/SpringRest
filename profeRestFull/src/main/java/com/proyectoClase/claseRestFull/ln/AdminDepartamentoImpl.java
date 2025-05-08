@@ -30,7 +30,7 @@ public class AdminDepartamentoImpl implements AdminDepartamento {
 		List<Departamento> departamentos;
 		
 		try {
-			departamentos= new ArrayList<Departamento>();
+			departamentos= repository.findAll();
 			
 		}catch(Exception e) {
 			log.error("Exception", e);
@@ -51,7 +51,7 @@ public class AdminDepartamentoImpl implements AdminDepartamento {
 		try {
 			Optional<Departamento> departamentoOp= repository.findById(idDepartamento);
 			if(!departamentoOp.isPresent()) throw new ServicioException(CodeError.DEPARTAMENTO_NOT_FOUND);
-			departamento= null; 
+			departamento= departamentoOp.get(); 
 		}catch(ServicioException se) {
 			log.error("ServicioException", se);
 			throw se;
@@ -92,6 +92,33 @@ public class AdminDepartamentoImpl implements AdminDepartamento {
 			throw new ServicioException(CodeError.ERROR_GENERAL,e);
 		}
 		
+	}
+
+
+	@Override
+	public List<Departamento> listDepartamentosByIdRegion(Integer idRegion) throws ServicioException {
+		log.info("[listDepartamentosByIdRegion]");
+		log.debug("[idRegion: "+idRegion+"]");
+		
+			try {
+			return repository.findByIdRegion(idRegion);
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodeError.ERROR_GENERAL,e);
+		}
+	}
+
+
+	public List<Departamento> listDepartamentosByIdDireccion(Integer idDireccion) throws ServicioException {
+		log.info("[listDepartamentosByIdDireccion]");
+		log.debug("[idRegion: "+idDireccion+"]");
+		
+			try {
+			return repository.findByDireccion_Id(idDireccion);
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodeError.ERROR_GENERAL,e);
+		}
 	}
 	
 	
